@@ -3,7 +3,7 @@ snippet v
 	${1} := ${2}
 
 snippet vr
-	var ${1:t} ${0:string}
+	var ${1:t} ${2:string}
 
 snippet var
 	var ${1} ${2} = ${3}
@@ -14,15 +14,15 @@ snippet vars
 	)
 
 snippet ap
-	append(${1:slice}, ${0:value})
+	append(${1:slice}, ${2:value})
 
 snippet ch
-	chan ${0:int}
+	chan ${1:int}
 
 snippet co
 	const (
 		${1:NAME1} = iota
-		${0:NAME2}
+		${2:NAME2}
 	)
 
 snippet im
@@ -50,7 +50,7 @@ snippet el
 
 snippet ir
 	if err != nil {
-		${0}
+		${1}
 	}
 
 snippet ie
@@ -59,58 +59,55 @@ snippet ie
 	} else {
 		${3}
 	}
-	${0}
 
 snippet fo
-	for ${2:i} := 0; $2 < ${1:count}; $2${3:++} {
+	for ${1:i} := 0; $2 < ${3:count}; $2${3:+=1} {
 		${4}
 	}
-	${0}
 
 snippet df
-	defer ${0:func}()
+	defer ${1:func}()
 
 snippet dfr
 	defer func() {
 		if err := recover(); err != nil {
-			${0}
+			${1}
 		}
 	}()
 
 snippet fr
 	for ${1:k}, ${2:v} := range ${3} {
-		${0}
+		${4}
 	}
 
 snippet fn
 	func ${1:funcName}(${2}) ${3:error} {
-		${0}
+		${4}
 	}
 
 
 snippet fm
 	func (self ${1:type}) ${2:funcName}(${3}) ${4:error} {
-		${0}
+		${5}
 	}
 
 snippet mk
-	make(${1:[]string}, ${0:0})
+	make(${1:[]atype}, ${2:0})
 
 snippet map
-	map[${1:string}]${0:int}
+	map[${1:keyType}]${2:valType}
 
 snippet main
 	func main() {
 		${1}
 	}
-	${0}
 
 
 snippet nw
-	new(${0:type})
+	new(${1:type})
 
 snippet pn
-	panic("${0:msg}")
+	panic("${1:msg}")
 
 snippet logp
 	log.Println("${1}")
@@ -131,13 +128,13 @@ snippet sl
 	case ${4:v2} := <-${5:chan2}
 		${6}
 	default:
-		${0}
+		${7}
 	}
 
 
 snippet tst
 	type ${1:name} struct {
-		${0}
+		${2}
 	}
 
 snippet sw
@@ -147,17 +144,17 @@ snippet sw
 	case ${4:value2}:
 		${5}
 	default:
-		${0}
+		${6}
 	}
 
 snippet cs
 	case ${1:value}:
-		${0}
+		${2}
 
 snippet gof
 	go func(${1} ${2:type}) {
 		${3:/* code */}
-	}(${0})
+	}(${4})
 
 
 #
@@ -165,6 +162,6 @@ snippet gof
 #
 
 snippet Tfn
-	func Test${1}(t *testing.T) {
-		${0}
+	func Test${1:name  }(t *testing.T) {
+		${2}
 	}
