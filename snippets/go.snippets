@@ -118,6 +118,9 @@ snippet logf
 snippet pr
 	fmt.Printf("%${1:s}\n", ${2:var})
 
+snippet prn
+	fmt.Println(${1:var})
+
 snippet sp
 	fmt.Sprintf("%${1:s}", ${2:var})
 
@@ -165,3 +168,5 @@ snippet Tfn
 	func Test${1:name  }(t *testing.T) {
 		${2}
 	}
+snippet t.E
+	t.Error("\nExp", ${1:this}, "\nGot", ${2:that})
