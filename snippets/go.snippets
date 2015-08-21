@@ -33,11 +33,6 @@ snippet im
 snippet in
 	interface{}
 
-snippet inf
-	interface ${1:name} {
-		${2:/* methods */}
-	}
-
 snippet if
 	if ${1:/* condition */} {
 		${2}
@@ -51,6 +46,11 @@ snippet el
 snippet ir
 	if err != nil {
 		${1}
+	}
+
+snippet iri
+	if err:= ${1}; err != nil {
+		${2}
 	}
 
 snippet ie
@@ -87,8 +87,8 @@ snippet fn
 
 
 snippet fm
-	func (self ${1:type}) ${2:funcName}(${3}) ${4:error} {
-		${5}
+	func (${1:s} ${2:type}) ${3:funcName}(${4}) ${5:error} {
+		${6://body}
 	}
 
 snippet mk
@@ -134,6 +134,10 @@ snippet sl
 		${7}
 	}
 
+snippet tin
+	type ${1:name} interface {
+		${2:/* methods */}
+	}
 
 snippet tst
 	type ${1:name} struct {
@@ -159,6 +163,19 @@ snippet gof
 		${3:/* code */}
 	}(${4})
 
+#
+# Play
+#
+#
+
+snippet Pl
+	package main
+
+	import "fmt"
+
+	func main() {
+		fmt.Println("${1:hello}")
+	}
 
 #
 # Testing
@@ -169,4 +186,9 @@ snippet Tfn
 		${2}
 	}
 snippet t.E
-	t.Error("\nExp", ${1:this}, "\nGot", ${2:that})
+	t.Error("\nExp", ${1:exp}, "\nGot", ${2:got})
+
+snippet Tif
+	if !reflect.DeepEqual(${1:exp}, ${2:got}) {
+		t.Error("\nExp", ${0:exp}, "\nGot", ${0:got})
+	}
