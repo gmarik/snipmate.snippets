@@ -6,7 +6,7 @@ snippet vr
 	var ${1:t} ${2:string}
 
 snippet var
-	var ${1} ${2} = ${3}
+	var ${1} ${2} = ${3:nil}
 
 snippet vars
 	var (
@@ -50,7 +50,12 @@ snippet el
 
 snippet ir
 	if err != nil {
-		${1}
+		${1:return err}
+	}
+
+snippet irl
+	if err != nil {
+		log.Fatal(err)
 	}
 
 snippet ie
@@ -80,15 +85,16 @@ snippet fr
 		${4}
 	}
 
+# Functions
+
 snippet fn
 	func ${1:funcName}(${2}) ${3:error} {
-		${4}
+		return ${4:nil}
 	}
 
-
 snippet fm
-	func (self ${1:type}) ${2:funcName}(${3}) ${4:error} {
-		${5}
+	func (m *${1:type}) ${2:funcName}(${3}) ${4:error} {
+		return ${5:nil}
 	}
 
 snippet mk
@@ -159,7 +165,6 @@ snippet gof
 		${3:/* code */}
 	}(${4})
 
-
 #
 # Testing
 #
@@ -168,5 +173,35 @@ snippet Tfn
 	func Test${1:name  }(t *testing.T) {
 		${2}
 	}
-snippet t.E
-	t.Error("\nExp", ${1:this}, "\nGot", ${2:that})
+
+snippet Tif
+	exp := ${1:hello}
+	if got != exp {
+		t.Errorf("\nExp: %v\nGot: %v", exp, got)
+	}
+
+snippet Tifr
+	exp := ${1:hello}
+	if !reflect.DeepEqual(got, exp) {
+		t.Errorf("\nExp: %v\nGot: %v", exp, got)
+	}
+
+snippet Tcas
+
+	cases := []struct {
+		exp, got ${1:type}
+	}{
+		{
+			${1:values}
+		},
+	}
+
+	for _, c := range cases {
+		
+		exp := c.exp
+		got := fn(c.got)
+
+		if !reflect.DeepEqual(got, exp) {
+			t.Errorf("\nExp: %v\nGot: %v", exp, got)
+		}
+	}
