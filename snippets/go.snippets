@@ -205,3 +205,30 @@ snippet Tcas
 			t.Errorf("\nExp: %v\nGot: %v", exp, got)
 		}
 	}
+
+snippet Isort
+
+	type sortable struct {
+		m []type
+	}
+
+	func (s *sortable) Len() int {
+		return len(s.m)
+	}
+
+	func (s *sortable) Swap(i, j int) {
+		s.m[i], s.m[j] = s.m[j], s.m[i]
+	}
+
+	func (s *sortable) Less(i, j int) bool {
+		return string(s.m[i]) < string(s.m[j])
+	}
+
+snippet Iomap
+
+	ordered := make([]int, 0, len(sourceMap))
+	for r, _ := range sourceMap {
+		ordered = append(ordered, r)
+	}
+
+	sort.Sort(&sortable{ordered})
