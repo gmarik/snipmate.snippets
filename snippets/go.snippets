@@ -51,7 +51,7 @@ snippet ir
 snippet iri
 	if err:= ${1}; err != nil {
 		${2}
-    }
+  }
 
 snippet irf
 	if err != nil {
@@ -73,7 +73,7 @@ snippet fo
 snippet df
 	defer ${1:func}()
 
-snippet dfr
+snippet dref
 	defer func() {
 		if err := recover(); err != nil {
 			${1}
@@ -93,20 +93,15 @@ snippet fn
 	}
 
 snippet fm
-	func (${1:s} *${2:type}) ${3:funcName}(${4}) ${5:error} {
-		return ${5:nil}
+	func (${1:s} *${2:Type}) ${3:fName}(${4:arg}) ${5:error} {
+		${5:return nil}
+	}
 
 snippet mk
 	make(${1:[]atype}, ${2:0})
 
 snippet map
 	map[${1:keyType}]${2:valType}
-
-snippet main
-	func main() {
-		${1}
-	}
-
 
 snippet nw
 	new(${1:type})
@@ -173,10 +168,18 @@ snippet gof
 #
 #
 
-snippet Pl
+snippet ma
+	func main() {
+		${1}
+	}
+
+snippet main
 	package main
 
-	import "fmt"
+	import (
+			"fmt"
+	)
+
 	func main() {
 		fmt.Println("${1:hello}")
 	}
@@ -185,8 +188,18 @@ snippet Pl
 # Testing
 #
 
+snippet test
+	package ${0:}
+
+	import (
+			"testing"
+	)
+	func Test${1:name}(t *testing.T) {
+		${2}
+	}
+
 snippet Tfn
-	func Test${1:name  }(t *testing.T) {
+	func Test${1:name}(t *testing.T) {
 		${2}
 	}
 snippet t.E
@@ -249,3 +262,15 @@ snippet Iomap
 	}
 
 	sort.Sort(&sortable{ordered})
+
+snippet scan
+	s := bufio.NewScanner(os.Stdin)
+	s.Split(bufio.ScanLines)
+
+	for s.Scan() {
+		line := s.Text()
+	}
+
+	if err := scanner.Err(); err != nil {
+		log.Println("input scanner:", err)
+	}
